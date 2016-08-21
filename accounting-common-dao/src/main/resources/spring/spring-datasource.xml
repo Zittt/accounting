@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <tx:annotation-driven/>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+        <property name="targetDataSource">
+            <bean class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+                <property name="url" value="${base.jdbc.url}"/>
+                <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+                <property name="username" value="${base.jdbc.username}"/>
+                <property name="password" value="${base.jdbc.password}"/>
+                <property name="initialSize" value="${base.jdbc.initialSize}"/>
+                <property name="minIdle" value="${base.jdbc.minIdle}"/><!-- min conn,lt will be created -->
+                <property name="maxWait" value="${base.jdbc.maxWait}"/><!-- ms -->
+                <property name="maxActive" value="${base.jdbc.maxActive}"/>
+            </bean>
+        </property>
+    </bean>
+<!-- ,com.noah.jobapp.paysystem.dao.domain -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath*:com/zit/accounting/dao/mapper/*.xml"/>
+        <property name="typeAliasesPackage" value="com.zit.accounting.dao.domain"/>
+        <property name="configLocation" value="classpath:conf/mybatis-config.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="mapperScanner">
+        <property name="basePackage" value="com.zit.accounting.dao.mapperr"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+
+
+    <!--global conf  from base.properties-->
+    <!-- <bean id="envConfig" class="com.noah.jobapp.common.utils.config.EnvConfig">
+        <property name="tradesource" value="${base.hs.request.tradesource}"/>
+        <property name="requestURL" value="${base.hs.request.url}"/>
+        <property name="merid" value="${base.hs.request.merid}"/>
+        <property name="phpMsgApiHost" value="${base.message.url}"/>
+        <property name="onoff" value="${base.message.onoff}"/>
+        <property name="phonelist" value="${base.message.phonelist}"/>
+        <property name="assetUrl" value="${base.asset.update.url}"/>
+        <property name="dataBizHost" value="${base.dataBiz.apiHost}"/>
+        <property name="redisHost" value="${base.redis.host}"/>
+        <property name="fundCode" value="${base.fundCode}"/>
+        <property name="redisPort" value="${base.redis.port}"/>
+        <property name="orderHistoryKey" value="${base.redis.orderHistoryKey}"/>
+        <property name="keyfileSourceSystem" value="${base.encrypt.keyfileSourceSystem}"/>
+        <property name="batchSwif" value="${base.batch.batchSwif}"/>
+        <property name="busiphonelist" value="${base.message.busi.phonelist}"/>
+    </bean> -->
+<!-- searchmaster's job  -->
+   <!--  <bean id="globalConfig" class="com.noah.jobapp.common.utils.config.SearchGlobalConfig">
+    	<property name="succMobiles" value="${base.solr.succ.mobiles}"></property>
+		<property name="failMobiles" value="${base.solr.fail.mobiles}"></property>
+		<property name="phpMsgApiHost" value="${base.solr.mobiles.ip}"></property>
+		<property name="onoff" value="${base.solr.mobiles.ip.onoff}"></property>
+		<property name="pgLogDir" value="${base.solr.site.log.path}"></property>
+		<property name="solrServerList" value="${base.solr.site.server.url}"></property>
+		<property name="searchClientList" value="${base.search.client.monitor.url}"></property>
+		<property name="sitEnv" value="${base.solr.site.env}"></property>
+		<property name="productUrl" value="${base.php.product.url}"></property>
+		<property name="stockUrl" value="${base.stock.report.url}"></property>
+    </bean>
+
+
+    <bean id="jedisUtil" class="com.noah.jobapp.common.utils.redis.JedisUtil">
+        <property name="jedisHost" value="${base.redis.host}" />
+        <property name="jedisPort" value="${base.redis.port}" />
+        <property name="jedisPwd" value="${decryption.base.redis.password}" />
+    </bean> -->
+
+</beans>
