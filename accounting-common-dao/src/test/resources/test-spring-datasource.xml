@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <tx:annotation-driven/>
+    
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/conf/base.properties</value>
+			</list>
+		</property>
+	</bean>
+    
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+        <property name="targetDataSource">
+            <bean class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+                <property name="url" value="${base.jdbc.url}"/>
+                <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+                <property name="username" value="${base.jdbc.username}"/>
+                <property name="password" value="${base.jdbc.password}"/>
+                <property name="initialSize" value="0"/>
+                <property name="minIdle" value="2"/><!-- min conn,lt will be created -->
+                <property name="maxWait" value="5000"/><!-- ms -->
+                <property name="maxActive" value="20"/>
+            </bean>
+        </property>
+    </bean>
+<!-- ,com.noah.jobapp.paysystem.dao.domain -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath*:com/zit/accounting/dao/mapper/*.xml"/>
+        <property name="typeAliasesPackage" value="com.zit.accounting/domain"/>
+        <property name="configLocation" value="classpath:conf/mybatis-config.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="orderMapperScanner">
+        <property name="basePackage" value="com.zit.accounting.dao.mapper
+        				"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+
+
+
+</beans>

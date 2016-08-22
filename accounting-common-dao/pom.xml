@@ -9,4 +9,12 @@
     <version>0.0.1</version>
   </parent>
   <artifactId>accounting-common-dao</artifactId>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>com.accounting</groupId>
+  		<artifactId>accounting-common-utils</artifactId>
+  	</dependency>
+  </dependencies>
+  
 </project>
