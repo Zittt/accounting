@@ -17,7 +17,7 @@ public class AccConsumeTypeMapperTest extends BaseDaoTest{
 	
 	@Test
 	public void testSelectByPrimaryKey() {
-		_LOG.info(JSONObject.toJSONString(accConsumeTypeMapper.selectByPrimaryKey(2)));
+		_LOG.info("###" + JSONObject.toJSONString(accConsumeTypeMapper.selectByPrimaryKey(2)));
 		
 	}
 	
