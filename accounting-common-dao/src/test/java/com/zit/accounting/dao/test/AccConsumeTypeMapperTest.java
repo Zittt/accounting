@@ -1,5 +1,6 @@
 package com.zit.accounting.dao.test;
 
+import com.zit.accounting.dao.domain.AccConsumeType;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,5 +21,15 @@ public class AccConsumeTypeMapperTest extends BaseDaoTest{
 		_LOG.info("###" + JSONObject.toJSONString(accConsumeTypeMapper.selectByPrimaryKey(2)));
 		
 	}
-	
+//
+	@Test
+	public void testInsert() {
+		AccConsumeType acc = new AccConsumeType();
+		acc.setTypeCode(8);
+		acc.setTypeDesc("hahah");
+		acc.setTypeName("fjaoisjfdaoijf");
+		accConsumeTypeMapper.insert(acc);
+		_LOG.info("###################id:" + acc.getAccConsumeTypeId());
+	}
+
 }
