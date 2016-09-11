@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+
+    <context:component-scan base-package="com.zit.accounting.rpc" use-default-filters="false" annotation-config="true">
+        <context:include-filter type="regex" expression=".*Stub.*Repository" />
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+    </context:component-scan>
+
+
+    <import resource="classpath*:/spring/producer-test1-mq.xml" />
+    <import resource="classpath*:/spring/consumer-test1-mq.xml" />
+
+    <!--<bean id="offLinetask" class="com.noah.paysystem.rpc.batch.OffLinePayBatch"></bean>-->
+
+    <!--<task:scheduled-tasks>-->
+        <!--&lt;!&ndash;每天一点执行0 00 15 * * ?  &ndash;&gt;-->
+        <!--&lt;!&ndash;5/3 * * * * ?&ndash;&gt;-->
+        <!--&lt;!&ndash;<task:scheduled ref="task" method="init" cron="0/10 * * * * ?" />&ndash;&gt;-->
+        <!--&lt;!&ndash;<task:scheduled ref="offLinetask" method="init" cron="0 0/5 * * * ?" />&ndash;&gt;-->
+
+    <!--</task:scheduled-tasks>-->
+
+
+</beans>

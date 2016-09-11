@@ -10,12 +10,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.zit.accounting.dao.mapper.AccConsumeTypeMapper;
 
 public class AccConsumeTypeMapperTest extends BaseDaoTest{
-	
+
+	private static final Logger _LOG = LoggerFactory.getLogger(AccConsumeTypeMapperTest.class);
+
 	@Autowired
 	private AccConsumeTypeMapper accConsumeTypeMapper;
-	
-	private static final Logger _LOG = LoggerFactory.getLogger(AccConsumeTypeMapperTest.class);
-	
+
 	@Test
 	public void testSelectByPrimaryKey() {
 		_LOG.info("###" + JSONObject.toJSONString(accConsumeTypeMapper.selectByPrimaryKey(2)));
@@ -31,5 +31,4 @@ public class AccConsumeTypeMapperTest extends BaseDaoTest{
 		accConsumeTypeMapper.insert(acc);
 		_LOG.info("###################id:" + acc.getAccConsumeTypeId());
 	}
-
 }

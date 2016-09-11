@@ -17,7 +17,11 @@
   		<groupId>com.accounting</groupId>
   		<artifactId>accounting-common-utils</artifactId>
   	</dependency>
-  
+      <dependency>
+          <groupId>com.accounting</groupId>
+          <artifactId>accounting-biz-rpc</artifactId>
+          <version>0.0.1</version>
+      </dependency>
   </dependencies>
   
 </project>
