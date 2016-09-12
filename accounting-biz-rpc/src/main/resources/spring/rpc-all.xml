@@ -22,6 +22,7 @@
 
     <import resource="classpath*:/spring/producer-test1-mq.xml" />
     <import resource="classpath*:/spring/consumer-test1-mq.xml" />
+    <import resource="classpath*:/spring/consumer-test2-mq.xml" />
 
     <!--<bean id="offLinetask" class="com.noah.paysystem.rpc.batch.OffLinePayBatch"></bean>-->
 

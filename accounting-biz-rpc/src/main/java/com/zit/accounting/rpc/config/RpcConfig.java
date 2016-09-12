@@ -18,6 +18,9 @@ public class RpcConfig {
     @Value("${base.test1.routingkey}")
     private String test1Routingkey;
 
+    @Value("${base.test2.routingkey}")
+    private String test2Routingkey;
+
 
     public String getTest1Queue() {
         return test1Queue;
@@ -37,6 +40,14 @@ public class RpcConfig {
 
     public String getTest1Routingkey() {
         return test1Routingkey;
+    }
+
+    public String getTest2Routingkey() {
+        return test2Routingkey;
+    }
+
+    public void setTest2Routingkey(String test2Routingkey) {
+        this.test2Routingkey = test2Routingkey;
     }
 
     public void setTest1Routingkey(String test1Routingkey) {

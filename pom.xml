@@ -330,8 +330,8 @@
 		<!-- plugins end -->
 
 		<filters>
-			<filter>../conf/filter/env-local.properties</filter>
-            <!--<filter>../conf/filter/env-${env}.properties</filter>-->
+			<!--<filter>../conf/filter/env-local.properties</filter>-->
+            <filter>../conf/filter/env-${env}.properties</filter>
         </filters>
 		<resources>
 			<resource>
@@ -356,6 +356,7 @@
 	</build>
 
 	<profiles>
+
 		<profile>
 			<id>local</id>
 			<properties>

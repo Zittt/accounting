@@ -19,6 +19,7 @@
     <rabbit:direct-exchange id="test1ExchangeId" durable="true" auto-delete="false" name="${base.test1.exchange}">
         <rabbit:bindings>
             <rabbit:binding queue="${base.test1.queue}" key="${base.test1.routingkey}" />
+            <rabbit:binding queue="${base.test2.queue}" key="${base.test2.routingkey}" />
         </rabbit:bindings>
     </rabbit:direct-exchange>
 

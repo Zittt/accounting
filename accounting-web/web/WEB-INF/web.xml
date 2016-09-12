@@ -6,9 +6,13 @@
          metadata-complete="true" version="3.1">
     <display-name>accounting</display-name>
     <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>accounting</param-value>
+    </context-param>
+    <context-param>
         <param-name>spring.profiles.default</param-name>
-        <!--<param-value>${env}</param-value>-->
-        <param-value>local</param-value>
+        <param-value>${env}</param-value>
+        <!--<param-value>local</param-value>-->
     </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
